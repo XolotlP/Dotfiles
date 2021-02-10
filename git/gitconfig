@@ -1,0 +1,20 @@
+[user]
+    name = XolotlP
+    email = xolotl.mp@gmail.com
+[color]
+    ui = auto
+[core]
+    editor = /usr/bin/vim
+    excludesFile = /home/xolotl/.gitignore
+[alias]
+    b = branch
+    co = checkout
+    l = log --graph --decorate --oneline
+    lo = log --graph --decorate --oneline master..
+    clear-branches = remote prune origin
+[merge]
+    tool = vimdiff
+[init]
+	defaultBranch = master
+[pull]
+	rebase = false

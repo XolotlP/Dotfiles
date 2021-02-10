@@ -1,0 +1,29 @@
+# build output directories
+/_site/
+/out
+/target
+
+# dependency caches
+node_modules/
+packages/
+.bundle/
+
+# compiled code
+*.o
+*.pyc
+*.class
+*.obj
+*.exe
+*.bin
+
+# runtime generated files
+*.log
+*.tmp
+
+# vim files
+tags
+Session.vim
+
+# env variables
+.rbenv-vars
+.nvmrc
