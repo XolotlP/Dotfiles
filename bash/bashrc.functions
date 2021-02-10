@@ -1,0 +1,97 @@
+#!/bin/bash
+
+# append path to $PATH only if not already in variable
+_appendpath () {
+    case ":$PATH:" in
+        *:"$1":*)
+            ;;
+        *)
+            PATH="${PATH:+$PATH:}$1"
+            ;;
+    esac
+    export PATH
+}
+
+# prepend path to $PATH only if not already in variable
+_prependpath () {
+    case ":$PATH:" in
+        *:"$1":*)
+            ;;
+        *)
+            PATH="$1:${PATH:+$PATH}"
+            ;;
+    esac
+    export PATH
+}
+
+# taken from
+# https://www.linuxjournal.com/content/removing-duplicate-path-entries-reboot
+cleanuppath () {
+    export PATH=$(
+        n= IFS=':'
+        for e in $PATH; do
+            [[ :$n == *:$e:* ]] || n+=$e:
+        done
+        echo "${n:0: -1}"
+    )
+
+    unset _appendpath
+    unset _prependpath
+}
+
+# find a file/dir up in the directory tree
+find_up () {
+    path=$(pwd)
+    while [[ "$path" != "" && ! -e "$path/$1" ]]; do
+        path=${path%/*}
+    done
+    printf "%s" $path
+}
+
+# use the specified node version (requires find_up function and nvm)
+set_node_version() {
+    default_version=$(nvm version default)
+    current_version=$(nvm current)
+    nvm_path=$(find_up .nvmrc)
+
+    if [[ -n $nvm_path ]]; then
+        [[ $(<"$nvm_path"/.nvmrc) != $current_version ]] && nvm use
+    elif [[ $current_version != $default_version ]]; then
+        nvm use default > /dev/null
+    fi
+}
+
+nvm_update() {
+    (
+    cd "$NVM_DIR"
+    git fetch --tags origin
+    git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
+    ) && \. "$NVM_DIR/nvm.sh"
+}
+
+# add functionalities to the cd command
+cd() {
+    builtin cd "$@"; ret=$?
+    if [[ $ret -eq 0 ]]; then
+        set_node_version            # use the correct node version
+    fi
+    return $ret
+}
+
+# convert yaml files to json (requires ruby)
+yaml2json() {
+    ruby -ryaml -rjson -e \
+        'puts JSON.pretty_generate(YAML.load(ARGF))' $*
+}
+
+# search and install pacman packages interactively (requires fzf)
+pacsearch() {
+    pacman -Ss $1 | sed -En "s:^[a-z]+/::p" | \
+    fzf --nth=1,3 --reverse --prompt='package: ' \
+    --preview 'pacman -Qi {1} 2> /dev/null || pacman -Si {1}' \
+    --preview-window='right:50%' | \
+    cut -f1 -d' ' | xargs -ro sudo pacman -S
+}
+
+# exported functions
+export -f find_up

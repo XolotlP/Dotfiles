@@ -1,0 +1,55 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# start tmux when inside a graphical environment
+if [[ $DISPLAY && -z $TMUX ]]; then
+    export terminal=$(ps -o 'ppid=' -p $$ | xargs ps -o 'cmd=' -p)
+    exec tmux
+fi
+
+source /usr/share/git/completion/git-prompt.sh
+source /usr/share/git/completion/git-completion.bash
+source ~/.dotfiles/config/fzf.sh
+source ~/.dotfiles/bash/bashrc.functions
+source ~/.bashrc.aliases
+
+source ~/.dotfiles/prompt/prompt.sh
+
+# default editor
+export VISUAL=vim
+
+# history settings
+export HISTCONTROL=ignoreboth:erasedups
+export HISTIGNORE="check*:poweroff*:reboot*:history*:ls:ps"
+export HISTTIMEFORMAT="[%b %d %R] "
+
+# disables Flow Control(XON/OFF flow control) for use of ctrl+s & ctrl+q
+stty -ixon
+# settings controlling optional shell behavior
+shopt -s autocd
+
+# rbenv
+_prependpath "$HOME/.rbenv/bin"
+eval "$(rbenv init -)"
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                    # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# base16 shell colors
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
+
+# heroku autocomplete setup
+HEROKU_AC_BASH_SETUP_PATH=/home/xolotl/.cache/heroku/autocomplete/bash_setup &&
+    test -f $HEROKU_AC_BASH_SETUP_PATH && source $HEROKU_AC_BASH_SETUP_PATH;
+
+# eliminate repeated directories in path
+cleanuppath

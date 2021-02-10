@@ -1,0 +1,40 @@
+#
+# ~/.bashrc.aliases
+#
+alias ls='ls -h --color=auto --group-directories-first'
+alias tree='tree -C --dirsfirst'
+alias rm='rm -i'
+alias mkdir='mkdir -p'
+
+alias ag='ag --color-match "1;33"'
+alias grep='grep --color=auto'
+alias less='less --chop-long-lines --shift=15'
+alias bat='bat -p --theme=base16'
+
+alias free='free -h'
+alias df='df -h'
+alias du='du -h'
+alias su='su -l'
+
+alias bpeople='cd $HOME/Work/BluePeople/'
+alias caintra='cd $HOME/Work/BluePeople/caintra/'
+
+alias root='cd $(find_up .git/) && echo cd -- $PWD'
+alias dotfiles='cd $HOME/.dotfiles'
+alias check='checkupdates'
+alias repos-refresh='sudo reflector --include https --latest 20 --fastest 10 --save /etc/pacman.d/mirrorlist'
+
+alias rbenv-doctor='curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash'
+alias newsboat='newsboat 2> $HOME/.newsboat/other.log'
+
+alias bashrc='vim $HOME/.bashrc && source $HOME/.bashrc'
+alias aliasrc='vim $HOME/.bashrc.aliases && source $HOME/.bashrc.aliases'
+alias vimrc='vim $HOME/.vim/vimrc'
+alias tmuxrc='vim $HOME/.tmux.conf'
+
+# export QT_STYLE_OVERRIDE=gtk2
+# export QT_SELECT=qt5
+
+if [[ $LANG = '' ]]; then
+    export LANG=en_US.UTF-8
+fi
