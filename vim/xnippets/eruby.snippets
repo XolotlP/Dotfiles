@@ -1,0 +1,21 @@
+snippet link_to
+<%= link_to '${1:${VISUAL}}', $2 %>$0
+endsnippet
+
+snippet if
+<% if ${1:what?} %>
+	$2
+<% end %>$3
+endsnippet
+
+snippet form_with
+<%= form_with $1 do |form| %>
+	$2
+<% end %>$3
+endsnippet
+
+snippet each
+<% @$1.each do |$2| %>
+	$3
+<% end %>$4
+endsnippet

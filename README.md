@@ -4,16 +4,22 @@ Configuration files and utility scripts
 
 ## Tools:
 - Bash
-  - profile
-  - config
-  - aliases
-  - functions
+  - Profile
+  - Config
+  - Aliases
+  - Functions
 - Git
-  - config
-  - global ignore
+  - Config
+  - Global ignore
 - Tmux
-  - config
-  - auxiliar scripts
+  - Config
+  - Auxiliar scripts
+- Vim
+  - Config
+  - Filetype settings
+  - Ultisnips snippets
+  - CoC settings
+  - Single file color schemes
 
 ## Config files
 
@@ -21,6 +27,6 @@ Configuration files and utility scripts
 
 ## Scripts
 
-- prompt: bash script to generate the prompt
-- miscellaneous scripts
-- archive: old scripts useful for reference
+- Prompt: bash script to generate the prompt
+- Miscellaneous scripts
+- Archive: old scripts useful for reference

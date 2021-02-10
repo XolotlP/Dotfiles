@@ -1,0 +1,8 @@
+# old pluggin manager
+vim/autoload/plug.vim.old
+
+# pluggins files
+vim/plugged/**
+
+# history fieles
+vim/.netrwhist

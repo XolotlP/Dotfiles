@@ -1,0 +1,6 @@
+snippet hide_as_routes
+# hide active storage routes from rails routes
+initializer(:remove_activestorage_routes, after: :add_routing_paths) do |app|
+	app.routes_reloader.paths.delete_if { |path| path =~ /activestorage/ }
+end
+endsnippet

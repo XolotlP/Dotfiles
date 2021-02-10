@@ -1,0 +1,49 @@
+## Global Bloks
+global !p
+def tLink(title):
+	return title.replace(' ', '-').lower()
+endglobal
+
+## ----------------------------------------------------------------------------
+## Markdown Common
+## ----------------------------------------------------------------------------
+snippet em
+*${1:${VISUAL}}*$0
+endsnippet
+
+snippet bold
+**${1:${VISUAL}}**$0
+endsnippet
+
+snippet img
+![${1:img title}](${2:img location})
+endsnippet
+
+snippet link
+[${1:link}](${2:url})
+endsnippet
+
+snippet code
+\`\`\`${1:language}
+${2:${VISUAL}}
+\`\`\`
+$0
+endsnippet
+
+## ----------------------------------------------------------------------------
+## GFM
+## ----------------------------------------------------------------------------
+snippet task
+- [ ] ${1:${VISUAL}}
+endsnippet
+
+## ----------------------------------------------------------------------------
+## Markdown Personalized
+## ----------------------------------------------------------------------------
+snippet tui
+- [${1:${VISUAL:Content Title}}](#`!p snip.rv = tLink(t[1])`)
+endsnippet
+
+snippet toi
+1. [${1:${VISUAL:Content Title}}](#`!p snip.rv = tLink(t[1])`)
+endsnippet

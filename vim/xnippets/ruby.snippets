@@ -1,0 +1,36 @@
+snippet frozen
+# frozen_string_literal: ${1:true}
+$0
+endsnippet
+
+snippet def "Method Definition" bm
+def ${1:name}
+	${2:${VISUAL}}
+end$0
+endsnippet
+
+snippet do
+do$1
+	${2:${VISUAL}}
+end$0
+endsnippet
+
+snippet ->
+-> ${1:($2) }{ ${3:${VISUAL}} }$0
+endsnippet
+
+snippet proc-
+proc { ${1:|$2| }${3:${VISUAL}} }$0
+endsnippet
+
+snippet module
+module $1
+	${2:${VISUAL}}
+end$0
+endsnippet
+
+snippet class
+class $1
+	${2:${VISUAL}}
+end$0
+endsnippet

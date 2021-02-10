@@ -1,0 +1,21 @@
+{
+    // Coc config options
+    "coc.preferences.extensionUpdateCheck": "never",
+    "coc.source.file.ignoreHidden": false,
+    // floating window
+    "suggest.enablePreview": true,
+    "suggest.floatEnable": true,
+    "diagnostic.messageTarget": "float",
+    // Autocomplete
+    "suggest.noselect": true,
+    "suggest.minTriggerInputLength": 2,
+    "suggest.snippetIndicator": " ▼",
+    "suggest.maxCompleteItemCount": 20,
+    // linters info
+    "diagnostic.errorSign": "▶▶",
+    "diagnostic.warningSign": "!▶",
+    "diagnostic.infoSign": " ▶",
+    "diagnostic.hintSign": " ◆",
+    "diagnostic.virtualTextLines": 5,
+    "diagnostic.maxWindowHeight": 15
+}
