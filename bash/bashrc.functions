@@ -50,13 +50,11 @@ find_up () {
 
 # use the specified node version (requires find_up function and nvm)
 set_node_version() {
-    default_version=$(nvm version default)
-    current_version=$(nvm current)
     nvm_path=$(find_up .nvmrc)
 
     if [[ -n $nvm_path ]]; then
-        [[ $(<"$nvm_path"/.nvmrc) != $current_version ]] && nvm use
-    elif [[ $current_version != $default_version ]]; then
+        [[ $(<"$nvm_path"/.nvmrc) != $(nvm current) ]] && nvm use
+    elif [[ $(nvm current) != $(nvm version default) ]]; then
         nvm use default > /dev/null
     fi
 }
