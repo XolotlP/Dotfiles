@@ -11,7 +11,7 @@ not_in_tmux() {
 
 if [[ $PWD != $HOME ]]; then
     repo_name=$(find_up .git)
-    session_name=$(basename "${repo_name:-$PWD}" | tr -d .)
+    session_name=$(basename "${repo_name:-$PWD}" | tr -d . | tr '[:upper:]' '[:lower:]')
 else
     session_name=home
 fi
