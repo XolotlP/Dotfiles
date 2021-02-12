@@ -2,7 +2,7 @@
 Name=KeySync
 Type=Application
 Comment=Script to syncronize keepassxc databases
-Path=/home/xolotl/.dotfiles/helpers/key-sync
+Path=/home/xolotl/.dotfiles/scripts/key-sync
 Exec=sh key-sync.sh
 Icon=keysync
 Terminal=false
