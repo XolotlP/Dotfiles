@@ -56,17 +56,17 @@ call plug#end()
 " indentLine
 let g:indentLine_char = '│'
 let g:indentLine_fileTypeExclude = ['json']
-let g:indentLine_bufTypeExclude = ['help', 'terminal', 'netrw']
+let g:indentLine_bufTypeExclude = ['help', 'netrw', 'terminal']
 
 " AutoPairs
 " enable use of some alt keys
 set <M-b>=b
 set <M-s>=s
 set <M-j>=j
-let g:AutoPairsFlyMode = 1
 let g:AutoPairsShortcutBackInsert = '<M-b>'
 let g:AutoPairsShortcutFastWrap = '<M-s>'
 let g:AutoPairsShortcutJump = '<M-j>'
+let g:AutoPairsFlyMode = 1
 
 " vim-tmux-navigation
 " automatically rebalance windows on vim resize
@@ -83,15 +83,11 @@ let g:tmux_navigator_disable_when_zoomed = 1
 nnoremap <leader>to :VtrOpenRunner {'orientation': 'h', 'percentage': 50}<cr>
 nnoremap <leader>ta :VtrAttachToPane<cr>
 nnoremap <leader>tk :VtrKillRunner<cr>
-nnoremap <leader>tf :VtrFocusRunner<cr>
-" repeat last command
-nnoremap <leader>tl :VtrSendCommand<cr>
 " clear command buffer and ask for command
 nnoremap <leader>tc :VtrFlushCommand<cr>:VtrSendCommand<cr>
 " send selected text
 nnoremap <silent> <leader>ts :VtrSendLinesToRunner<cr>
 vnoremap <silent> <leader>ts y:VtrSendCommand <c-r>"<cr><cr>
-nnoremap <silent> <leader>te :VtrSendFile
 
 " vim-rooter
 let g:rooter_silent_chdir = 1
