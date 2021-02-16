@@ -74,8 +74,8 @@ autocmd VimResized * :wincmd =
 " zoom vim panes like tmux
 nnoremap <silent> <leader>- :wincmd _ <cr>:wincmd \|<cr>
 nnoremap <silent> <leader>= :wincmd = <cr>
-" Write all buffers before navigating from Vim to tmux pane
-let g:tmux_navigator_save_on_switch = 2
+" Write all buffers before navigating from Vim to tmux pane (1 :update, 2 :wall)
+let g:tmux_navigator_save_on_switch = 1
 " Disable tmux navigator when zooming the Vim pane
 let g:tmux_navigator_disable_when_zoomed = 1
 
@@ -96,7 +96,6 @@ let g:rooter_patterns = ['.git/']
 
 " fzf
 let g:fzf_layout = {'down': '12'}
-let g:fzf_history_dir = '~/.cache/fzf-history'
 function! FzfFiles(query, fullscreen)
     let spec = {
         \ 'source': 'fd --type f --hidden --exclude .git --exclude node_modules',
@@ -126,6 +125,7 @@ command! -bang -nargs=? Search call FzfSearch(<q-args>, <bang>0)
 let g:netrw_banner = 0
 let g:netrw_liststyle = 0
 let g:netrw_fastbrowse = 0
+let g:netrw_list_hide = '.git, node_modules'
 
 " Gutentags
 let g:gutentags_ctags_extra_args = ['--fields=+l']
@@ -149,7 +149,7 @@ let g:UltiSnipsSnippetDirectories=["xnippets"]
 let g:UltiSnipsExpandTrigger = '<nop>'
 
 " emmet-vim
-let g:user_emmet_leader_key = ','
+let g:user_emmet_leader_key = '<C-y>'
 let g:user_emmet_settings = {
 \   'javascript' : {
 \       'extends' : 'jsx',
@@ -159,7 +159,6 @@ let g:user_emmet_settings = {
 " vim-grip
 let g:grip_disable_when_no_jobs = 1
 let g:grip_default_map = 0
-nnoremap <buffer><silent> <leader>m :call GripToogle()<cr>
 
 " vimtex
 let g:tex_flavor = "latex"
@@ -170,7 +169,7 @@ let g:airline_theme = 'base16_classic'
 let g:airline_powerline_fonts = 1
 let g:airline_section_c = airline#section#create(['%{expand("%:h")}', 'readonly'])
 let g:airline_section_z = '%l/%L ㏑: %c'
-let g:airline_extensions = ['branch', 'coc', 'fugitiveline', 'gutentags',
+let g:airline_extensions = ['branch', 'coc', 'fugitiveline',
             \ 'netrw', 'quickfix', 'tabline', 'vimtex', 'whitespace']
 let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
