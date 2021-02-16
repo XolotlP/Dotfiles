@@ -2,7 +2,7 @@
 # ~/.bashrc.aliases
 #
 alias ls='ls -h --color=auto --group-directories-first'
-alias tree='tree -C --dirsfirst'
+alias tree='tree -C --dirsfirst -I node_modules'
 alias rm='rm -i'
 alias mkdir='mkdir -p'
 

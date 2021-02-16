@@ -1,0 +1,45 @@
+## ----------------------------------------------------------------------------
+## Javascript
+## ----------------------------------------------------------------------------
+snippet import
+import $1 from "$2";
+$0
+endsnippet
+
+snippet const
+const ${1:var} = ${2:function}($3);
+$0
+endsnippet
+
+snippet function
+function ${1:name}($2) {
+	$3
+}
+endsnippet
+
+snippet try
+try {
+	$1
+} catch (${2:e}) {
+	$3
+}$0
+endsnippet
+
+
+## ----------------------------------------------------------------------------
+## React (JSX)
+## ----------------------------------------------------------------------------
+
+snippet FGroup
+<Form.Group controlId="$1">
+	$2
+</Form.Group>$0
+endsnippet
+
+snippet FControl
+<Form.Control $1 />$0
+endsnippet
+
+snippet FLabel
+<Form.Label>${2:label}</Form.Label>
+endsnippet

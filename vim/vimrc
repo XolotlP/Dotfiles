@@ -99,7 +99,7 @@ let g:fzf_layout = {'down': '12'}
 let g:fzf_history_dir = '~/.cache/fzf-history'
 function! FzfFiles(query, fullscreen)
     let spec = {
-        \ 'source': 'fd --type f --hidden --exclude .git',
+        \ 'source': 'fd --type f --hidden --exclude .git --exclude node_modules',
         \ 'options': ['--prompt=>> ']
         \}
     call fzf#vim#files(a:query, spec, a:fullscreen)
@@ -147,6 +147,14 @@ let g:UltiSnipsEditSplit = 'context'
 let g:UltiSnipsSnippetsDir = '~/.vim/xnippets'
 let g:UltiSnipsSnippetDirectories=["xnippets"]
 let g:UltiSnipsExpandTrigger = '<nop>'
+
+" emmet-vim
+let g:user_emmet_leader_key = ','
+let g:user_emmet_settings = {
+\   'javascript' : {
+\       'extends' : 'jsx',
+\   },
+\}
 
 " vim-grip
 let g:grip_disable_when_no_jobs = 1
