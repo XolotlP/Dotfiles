@@ -16,6 +16,7 @@ source /usr/share/git/completion/git-completion.bash
 source ~/.dotfiles/config/fzf.sh
 source ~/.dotfiles/bash/bashrc.functions
 source ~/.bashrc.aliases
+source ~/.bashrc.aliases.extra
 
 source ~/.dotfiles/prompt/prompt.sh
 
@@ -30,7 +31,7 @@ export HISTTIMEFORMAT="[%b %d %R] "
 # disables Flow Control(XON/OFF flow control) for use of ctrl+s & ctrl+q
 stty -ixon
 # settings controlling optional shell behavior
-shopt -s autocd
+# shopt -s autocd
 
 # rbenv
 _prependpath "$HOME/.rbenv/bin"
@@ -47,10 +48,6 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && \
     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
         eval "$("$BASE16_SHELL/profile_helper.sh")"
-
-# heroku autocomplete setup
-HEROKU_AC_BASH_SETUP_PATH=/home/xolotl/.cache/heroku/autocomplete/bash_setup &&
-    test -f $HEROKU_AC_BASH_SETUP_PATH && source $HEROKU_AC_BASH_SETUP_PATH;
 
 # eliminate repeated directories in path
 cleanuppath

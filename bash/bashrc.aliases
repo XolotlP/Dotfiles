@@ -7,6 +7,7 @@ alias rm='rm -i'
 alias mkdir='mkdir -p'
 
 alias ag='ag --color-match "1;33"'
+alias rg='rg --colors "match:fg:yellow" --colors "line:fg:yellow" --colors "line:style:bold" --colors "path:fg:green" --colors "path:style:bold"'
 alias grep='grep --color=auto'
 alias less='less --chop-long-lines --shift=15'
 alias bat='bat -p --theme=base16'
