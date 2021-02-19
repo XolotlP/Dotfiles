@@ -28,7 +28,7 @@ alias newsboat='newsboat 2> $HOME/.newsboat/other.log'
 alias bashrc='vim $HOME/.bashrc && source $HOME/.bashrc'
 alias aliasrc='vim $HOME/.bashrc.aliases && source $HOME/.bashrc.aliases'
 alias vimrc='vim $HOME/.vim/vimrc'
-alias tmuxrc='vim $HOME/.tmux.conf'
+alias tmuxrc='vim $HOME/.tmux/tmux.conf'
 
 # export QT_STYLE_OVERRIDE=gtk2
 # export QT_SELECT=qt5
