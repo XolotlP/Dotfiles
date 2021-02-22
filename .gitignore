@@ -2,7 +2,9 @@
 vim/autoload/plug.vim.old
 
 # pluggins files
-vim/plugged/**
+vim/plugged/*
+tmux/plugins/*
+tmux/resurrect/
 
 # history fieles
 vim/.netrwhist
