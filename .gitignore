@@ -6,5 +6,8 @@ vim/plugged/*
 tmux/plugins/*
 tmux/resurrect/
 
-# history fieles
+# history files
 vim/.netrwhist
+
+# dictionaries
+vim/spell
