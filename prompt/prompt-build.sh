@@ -99,27 +99,23 @@ _add_section() {
 _ps1_prompt() {
     prompt=''
 
-    local background_colorA=24
-    local foreground_colorA=253
-    local background_colorB=$([[ $PROMPT_COLORS == 256 ]] && echo 39 || echo 104)
-    local background_colorC=$([[ $PROMPT_COLORS == 256 ]] && echo 2 || echo 102)
+    # example of usage
+    # _add_section "section_content" "background_color" "foreground_color" "styles"
+    # indicate current prompt user
+    _add_section "$([ $USER == 'xolotl' ] && echo '; λ ;' || echo ' \u ')" 24 253
+    # indicate current working directory
+    _add_section ' 🖿 :\W ' $([[ $PROMPT_COLORS == 256 ]] && echo 39 || echo 104)
+    # indicate git branch, if any
+    _add_section ' $(__git_ps1 "⎇ :%s") ' $([[ $PROMPT_COLORS == 256 ]] && echo 2 || echo 102)
 
-    local contentA="$([ $USER == 'xolotl' ] && echo '; λ ;' || echo ' \u ')"
-
-    _add_section "$contentA" $background_colorA $foreground_colorA
-    _add_section ' 🖿 :\W ' $background_colorB
-    _add_section ' $(__git_ps1 "⎇ :%s") ' $background_colorC
     prompt+='\[\e[0m\]'
 
     printf "%s " ${prompt@P}
 }
 
 _ps2_prompt() {
-    if [[ $PROMPT_COLORS == 256 ]]; then
-        prompt='\[\e[0;38;5;251m\]❙▶\[\e[0m\] '
-    else
-        prompt='\[\e[0;39;49m\]❙▶\[\e[0m\] '
-    fi
+    colors=$([[ $PROMPT_COLORS == 256 ]] && echo '38;5;251' || echo '39;49')
+    prompt="\[\e[0;${colors}m\]❙▶\[\e[0m\] "
     printf "%s " ${prompt@P}
 }
 
