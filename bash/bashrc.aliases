@@ -22,7 +22,7 @@ alias dotfiles='cd $HOME/.dotfiles'
 alias check='checkupdates'
 alias repos-refresh='reflector --protocol https --sort rate --latest 10 | sudo tee /etc/pacman.d/mirrorlist'
 
-alias rbenv-doctor='curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash'
+alias rbenv-doctor='curl -fsSL https://github.com/rbenv/rbenv-installer/raw/main/bin/rbenv-doctor | bash'
 alias newsboat='newsboat 2> $HOME/.newsboat/other.log'
 
 alias bashrc='vim $HOME/.bashrc && source $HOME/.bashrc'
