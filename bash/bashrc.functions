@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# append path to $PATH only if not already in variable
+## Manage system/user PATH variable
+# append if not already in variable
 _appendpath () {
     case ":$PATH:" in
         *:"$1":*)
@@ -11,8 +12,7 @@ _appendpath () {
     esac
     export PATH
 }
-
-# prepend path to $PATH only if not already in variable
+# prepend if not already in variable
 _prependpath () {
     case ":$PATH:" in
         *:"$1":*)
@@ -23,9 +23,7 @@ _prependpath () {
     esac
     export PATH
 }
-
-# taken from
-# https://www.linuxjournal.com/content/removing-duplicate-path-entries-reboot
+# remove duplicated entries
 cleanuppath () {
     export PATH=$(
         n= IFS=':'
@@ -39,6 +37,7 @@ cleanuppath () {
     unset _prependpath
 }
 
+## General Functions
 # find a file/dir up in the directory tree
 find_up () {
     path=$(pwd)
@@ -48,6 +47,7 @@ find_up () {
     printf "%s" $path
 }
 
+## Node specific functions
 # use the specified node version (requires find_up function and nvm)
 set_node_version() {
     nvm_path=$(find_up .nvmrc)
@@ -67,6 +67,7 @@ nvm_update() {
     ) && \. "$NVM_DIR/nvm.sh"
 }
 
+## Overload Bash/System Functions
 # add functionalities to the cd command
 cd() {
     builtin cd "$@"; ret=$?
@@ -76,6 +77,7 @@ cd() {
     return $ret
 }
 
+## Toolbox
 # convert yaml files to json (requires ruby)
 yaml2json() {
     ruby -ryaml -rjson -e \
