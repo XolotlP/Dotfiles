@@ -1,12 +1,15 @@
-set nocompatible                     " Disable vi compatibility
-let g:mapleader = "\<Space>"         " Make leader more accessible
-let g:maplocalleader = "\<Space>"    " Make leader more accessible
+set nocompatible                        " Disable vi compatibility
+let g:mapleader = "\<Space>"            " Make leader more accessible
+let g:maplocalleader = "\<Space>"       " Make local leader more accessible
 
 " Enable ship-in vim plugins
 runtime macros/matchit.vim  " Enhances %: it jumps between keyword pairs
 
+""------------------------------------------------------------------------------
+"" Plugins
+""------------------------------------------------------------------------------
 " Plugin manager(vim-plug) to update run :PlugUpgrade
-" automatically runs: 'filetype plugin indent on' and 'syntax enable'
+" It automatically runs: 'filetype plugin indent on' and 'syntax enable'
 call plug#begin('~/.vim/plugged')
 " improve vim usage
 Plug 'yggdroot/indentLine'
@@ -19,13 +22,13 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
 
 " ease code navigation
-Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'junegunn/fzf.vim'
 
 " ease team collaboration
 Plug 'tpope/vim-fugitive'
-Plug 'editorconfig/editorconfig-vim'
+" Plug 'editorconfig/editorconfig-vim'
 
 " add autocomplete/snippets
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -40,9 +43,11 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 
-" writing (no code)
-Plug 'pratikbhusal/vim-grip'
-Plug 'lervag/vimtex'
+" writing
+" markdown render
+" Plug 'pratikbhusal/vim-grip'
+" latex suite
+" Plug 'lervag/vimtex'
 
 " improve vim's look
 Plug 'chriskempson/base16-vim'
@@ -52,13 +57,15 @@ Plug 'vim-airline/vim-airline'
 " All Plugins must be added before the following line
 call plug#end()
 
+""------------------------------------------------------------------------------
 "" Plugins Settings
-" indentLine
+""------------------------------------------------------------------------------
+" IndentLine
 let g:indentLine_char = '│'
 let g:indentLine_fileTypeExclude = ['json']
 let g:indentLine_bufTypeExclude = ['help', 'netrw', 'terminal']
 
-" AutoPairs
+"" AutoPairs
 " enable use of some alt keys
 set <M-b>=b
 set <M-s>=s
@@ -68,7 +75,7 @@ let g:AutoPairsShortcutFastWrap = '<M-s>'
 let g:AutoPairsShortcutJump = '<M-j>'
 let g:AutoPairsFlyMode = 1
 
-" vim-tmux-navigation
+"" Vim-Tmux-navigation
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
 " zoom vim panes like tmux
@@ -79,7 +86,7 @@ let g:tmux_navigator_save_on_switch = 1
 " Disable tmux navigator when zooming the Vim pane
 let g:tmux_navigator_disable_when_zoomed = 1
 
-" vim-tmux-runner
+"" Vim-Tmux-runner
 nnoremap <leader>to :VtrOpenRunner {'orientation': 'h', 'percentage': 50}<cr>
 nnoremap <leader>ta :VtrAttachToPane<cr>
 nnoremap <leader>tk :VtrKillRunner<cr>
@@ -89,12 +96,19 @@ nnoremap <leader>tc :VtrFlushCommand<cr>:VtrSendCommand<cr>
 nnoremap <silent> <leader>ts :VtrSendLinesToRunner<cr>
 vnoremap <silent> <leader>ts y:VtrSendCommand <c-r>"<cr><cr>
 
-" vim-rooter
-let g:rooter_silent_chdir = 1
+"" Vim-rooter
+let g:rooter_patterns = ['.git']
 let g:rooter_change_directory_for_non_project_files = 'current'
-let g:rooter_patterns = ['.git/']
+" don't echo the project directory
+let g:rooter_silent_chdir = 0
+" resolve symbolic links in the file or directory
+let g:rooter_resolve_links = 1
 
-" fzf
+"" Gutentags
+let g:gutentags_ctags_extra_args = ['--fields=+l']
+let g:gutentags_file_list_command = 'git ls-files -oc --exclude-standard'
+
+" FZF
 let g:fzf_layout = {'down': '12'}
 function! FzfFiles(query, fullscreen)
     let spec = {
@@ -118,8 +132,6 @@ function! FzfSearch(query, fullscreen)
         \}
     call fzf#vim#grep(initial, 1, spec, a:fullscreen)
 endfunction
-command! -bang -nargs=? -complete=dir Files call FzfFiles(<q-args>, <bang>0)
-command! -bang -nargs=? Search call FzfSearch(<q-args>, <bang>0)
 
 " Netrw (file explorer)
 let g:netrw_banner = 0
@@ -127,28 +139,14 @@ let g:netrw_liststyle = 0
 let g:netrw_fastbrowse = 0
 let g:netrw_list_hide = '.git, node_modules'
 
-" Gutentags
-let g:gutentags_ctags_extra_args = ['--fields=+l']
-let g:gutentags_file_list_command = 'git ls-files -oc --exclude-standard'
-
-" Coc
-" don't give |ins-completion-menu| messages
-set shortmess+=c
-inoremap <expr> <tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <s-tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" Ultisnips
+" UltiSnips
 let g:UltisnipsEnableSnipMate = 0
 let g:UltiSnipsEditSplit = 'context'
 let g:UltiSnipsSnippetsDir = '~/.vim/xnippets'
 let g:UltiSnipsSnippetDirectories=["xnippets"]
 let g:UltiSnipsExpandTrigger = '<nop>'
 
-" emmet-vim
+" Emmet-Vim
 let g:user_emmet_leader_key = '<C-y>'
 let g:user_emmet_settings = {
 \   'javascript' : {
@@ -156,18 +154,18 @@ let g:user_emmet_settings = {
 \   },
 \}
 
-" vim-grip
-let g:grip_disable_when_no_jobs = 1
-let g:grip_default_map = 0
+" Vim-Grip
+" let g:grip_disable_when_no_jobs = 1
+" let g:grip_default_map = 0
 
-" vimtex
-let g:tex_flavor = "latex"
+" VimTex
+" let g:tex_flavor = 'latex'
 
-" vim-airline
+" Vim-Airline
 set laststatus=2
 let g:airline_theme = 'base16_classic'
 let g:airline_powerline_fonts = 1
-let g:airline_section_c = airline#section#create(['%{expand("%:h")}', 'readonly'])
+" let g:airline_section_c = airline#section#create(['%{expand("%:h")}', 'readonly'])
 let g:airline_section_z = '%l/%L ㏑: %c'
 let g:airline_extensions = ['branch', 'coc', 'fugitiveline',
             \ 'netrw', 'quickfix', 'tabline', 'vimtex', 'whitespace']
@@ -179,31 +177,54 @@ let g:airline_detect_spell = 0
 let g:airline_skip_empty_sections = 1
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 
+""------------------------------------------------------------------------------
 "" Commands
+""------------------------------------------------------------------------------
+" COC (for the use of the re-defined fzf functions)
+command! -bang -nargs=? -complete=dir Files call FzfFiles(<q-args>, <bang>0)
+command! -bang -nargs=? Search call FzfSearch(<q-args>, <bang>0)
+
 " Save file opened without root permission
 command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
-"" Mappings
+""------------------------------------------------------------------------------
+"" Mappings (for typing ease and for plugins)
+""------------------------------------------------------------------------------
 " Use kj to escape from insert/visual/command mode
-inoremap kj <esc>
-vnoremap kj <esc>
-cnoremap kj <esc>
+inoremap kj <Esc>
+vnoremap kj <Esc>
+cnoremap kj <Esc>
+
+" Interchange meaning of 0 and ^
+noremap 0 ^
+noremap ^ 0
+
+" Clear the last used seach pattern
+nnoremap <silent><leader>l :let @/ = ""<cr>
+" sort selected lines
+vnoremap <silent><f5> :sort<cr>
+
+"  Toggle file explorer
+nnoremap <silent><expr> <leader>e exists("w:netrw_rexlocal") ? ":Rexplore<cr>" : ":Explore<cr>"
+
 " Navigate between buffers
 nnoremap <leader>p :bprevious<cr>
 nnoremap <leader>n :bnext<cr>
 nnoremap <leader>q :bprevious<bar>bdelete #<cr>
-"  Toggle file explorer
-nnoremap <silent><expr> <leader>e exists("w:netrw_rexlocal") ? ":Rexplore<cr>" : ":Explore<cr>"
-" Use fzf to quickly navigate project
+
+" Use FZF to quickly navigate project
 nnoremap <leader>f :Files<cr>
 nnoremap <leader>s :Search<cr>
-" Interchange meaning of 0 and ^
-noremap 0 ^
-noremap ^ 0
-" sort selected lines
-vnoremap <silent><f5> :sort<cr>
-" Clear the last used seach pattern
-nnoremap <silent><leader>l :let @/ = ""<cr>
+
+" COC
+inoremap <expr> <tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <s-tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+
 " Open vim config file
 nnoremap <leader>vim :e $MYVIMRC<cr>
 " Reload vim config
@@ -211,54 +232,59 @@ nnoremap <leader>re :source $MYVIMRC<cr>
 " Open coc config file
 nnoremap <leader>coc :CocConfig<cr>
 
-""" General
-set wildmenu		            " Display completion matches in a status line
-set relativenumber              " Show line numbers relative to cursor
-set number                      " Show cursor line number
+""------------------------------------------------------------------------------
+"" General Options (Put at the end to avoid being overwriten by plugin's config)
+""------------------------------------------------------------------------------
+set splitbelow					        " New windows below the current one
+set splitright					        " New windows right of the current buffer
 
-set scrolloff=5                 " Maintain N lines of context
-set showmatch                   " Highlight matching brace
-set matchpairs+=<:>             " Add matching pairs to % command
+set number					            " Show cursor line number
+set relativenumber				        " Show line numbers relative to cursor
+set scrolloff=5					        " Mantain N line of context
 
-set splitbelow                  " New windows below the current one
-set splitright                  " New windows right of the current one
+set cursorline					        " Highlight current line
+set colorcolumn=+1				        " Add visual indicator for hard wrap
 
-set hidden                      " Don't unload hidden buffers (change buffers without saving)
+set wrap					            " Visual wrap of lines (enabled by default)
+set textwidth=80				        " Hard wrap, modifies text in the buffer
+set linebreak					        " Avoid word's breaking at end of display line
+set breakindent					        " Word wrap preserving identation
 
-set wrap                        " Visual wrap of lines (enabled by default)
-set textwidth=80                " Hard wrap, modifies text in the buffer
-set linebreak                   " Avoid words's breaking at end of display line
-set breakindent                 " Word wrap preserving identation
+set autoindent					        " Auto-indent new lines
+set smartindent					        " Enable smart-indent
+set shiftwidth=0				        " Auto-indent spaces (when 0 use tabstop value)
 
-set colorcolumn=+1              " Add visual indicator for hard wrap
-set cursorline                  " Highlight current line
+set expandtab					        " Use spaces instead of tabs
+set tabstop=4					        " Spaces a tab in the file counts for
+set softtabstop=-1				        " Spaces a tab counts for while editing (when negative use shiftwidth value)
+set smarttab					        " Enable smart-tabs
 
-set hlsearch                    " Highlight all search results
-set incsearch                   " Searches for strings incrementally
-set smartcase                   " Case sensitive if search contains uppercase
+set showmatch					        " Highlight matching brace
+set matchpairs+=<:>				        " Add matching pairs to % command
 
-set autoindent                  " Auto-indent new lines
-set smartindent                 " Enable smart-indent
-set shiftwidth=0                " Auto-indent spaces (when 0 use tabstop value)
+set undolevels=100				        " Number of undo levels
+set backspace=indent,eol,start			" Backspacing over evrything in insert mode
 
-set expandtab                   " Use spaces instead of tabs
-set tabstop=4                   " Spaces a tab in the file counts for
-set softtabstop=-1              " Spaces a tab counts for while editing (when negative use shiftwidth value)
-set smarttab                    " Enable smart-tabs
+set clipboard=unnamedplus       		" Access system clipboard
+set pastetoggle=<F2>            		" Toogle auto-indenting for code paste
 
-set undolevels=200              " Number of undo levels
-set backspace=indent,eol,start  " Backspacing over everything in insert mode
+set wildmenu					        " Display completion matches in a status line
 
-set pastetoggle=<F2>            " toogle auto-indenting for code paste
-set clipboard=unnamedplus       " access system clipboard
+set hlsearch                            " Highlight all search results
+set incsearch                           " Searches for strings incrementally
+set smartcase                           " Case sensitive if search contains uppercase
 
+" COC recomended
+set hidden                              " Don't unload hidden buffers (change buffers without saving)
+set shortmess+=c                        " Don't give ins-completion-menu messages
+
+""------------------------------------------------------------------------------
+""------------------------------------------------------------------------------
+" Base16-vim: Use terminal's colorscheme
 if filereadable(expand("~/.vimrc_background"))
     let base16colorspace=256
     source ~/.vimrc_background
-endif
-
-" Fix status line colors for airline base16_classic theme
-if g:airline_theme == "base16_classic"
+    " Fix WildMenu colors
     hi StatusLine cterm=NONE ctermfg=15 ctermbg=19
     hi WildMenu cterm=bold ctermfg=0 ctermbg=10
 endif
