@@ -16,6 +16,5 @@
     "diagnostic.warningSign": "!▶",
     "diagnostic.infoSign": " ▶",
     "diagnostic.hintSign": " ◆",
-    "diagnostic.virtualTextLines": 5,
-    "diagnostic.maxWindowHeight": 15
+    "diagnostic.virtualTextLines": 5
 }
