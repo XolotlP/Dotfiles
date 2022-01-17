@@ -255,7 +255,7 @@ set smartindent					        " Enable smart-indent
 set shiftwidth=0				        " Auto-indent spaces (when 0 use tabstop value)
 
 set expandtab					        " Use spaces instead of tabs
-set tabstop=4					        " Spaces a tab in the file counts for
+set tabstop=2					        " Spaces a tab in the file counts for
 set softtabstop=-1				        " Spaces a tab counts for while editing (when negative use shiftwidth value)
 set smarttab					        " Enable smart-tabs
 
