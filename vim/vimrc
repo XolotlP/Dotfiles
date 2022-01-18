@@ -163,7 +163,6 @@ let g:user_emmet_settings = {
 
 " Vim-Airline
 set laststatus=2
-let g:airline_theme = 'base16_classic'
 let g:airline_powerline_fonts = 1
 " let g:airline_section_c = airline#section#create(['%{expand("%:h")}', 'readonly'])
 let g:airline_section_z = '%l/%L ㏑: %c'
@@ -286,5 +285,5 @@ if filereadable(expand("~/.vimrc_background"))
     source ~/.vimrc_background
     " Fix WildMenu colors
     hi StatusLine cterm=NONE ctermfg=15 ctermbg=19
-    hi WildMenu cterm=bold ctermfg=0 ctermbg=10
+    hi WildMenu cterm=bold ctermfg=0 ctermbg=21
 endif
